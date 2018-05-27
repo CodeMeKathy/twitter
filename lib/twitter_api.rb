@@ -4,12 +4,13 @@ class TwitterApi
   end
 
   def self.get_last_25_tweets(username, replies=false, rts=false)
-    tweets = client.user_timeline(username, count: 25, exclude_replies: replies, include_rts: rts)
+    # tweets = 
+    client.user_timeline(username, count: 25, exclude_replies: replies, include_rts: rts)
     
-    tweets.each do |tweet|
-      puts tweet.text
-      puts tweet.created_at
-    end
+    # tweets.each do |tweet|
+    #   puts tweet.text
+    #   puts tweet.created_at
+    # end
   end
      
   def self.client

@@ -1,0 +1,15 @@
+<h1> Welcome to Kathy's Twitter API Portal </h1>
+
+<%# insert an input box %>
+
+<ul>
+  <% TwitterApi.get_last_25_tweets.each do |tweet|
+  <li>
+    <div>
+      <p><%= tweet.text %></p>
+      <p><%= tweet.created_at%></p>
+    <div>
+  </li>
+  <% end %>
+</ul>
+
