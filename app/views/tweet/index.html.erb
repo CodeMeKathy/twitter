@@ -2,11 +2,13 @@
 
 <%# insert an input box %>
 
-<%= form_tag do %>
+<%= form_with method: :get do %>
   <%= label_tag(:q, "Username:") %>
-  <%= text_field_tag(:q) %>
+  <%= text_field_tag(:q, "Insert Username") %>
   <%= submit_tag("Search") %>
 <% end %>
+
+<%# <% <h4> <%= username #>'s last 25 Tweets </h4>  %> 
 
 <ul>
   <% TwitterApi.get_last_25_tweets('StackCommerce').each do |tweet| %>
