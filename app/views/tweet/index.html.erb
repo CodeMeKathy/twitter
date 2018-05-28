@@ -1,23 +1,31 @@
-<h1> Welcome to Kathy's Twitter API Portal </h1>
+<h1> Welcome to Twitterverse World </h1>
 
 <%# insert an input box %>
 
-<%= form_with method: :get do %>
-  <%= label_tag(:q, "Username:") %>
-  <%= text_field_tag(:q, "Insert Username") %>
-  <%= submit_tag("Search") %>
-<% end %>
+<%= form_with method: :get do %> 
+  <%= label_tag(:search, "Username:") %> 
+  <%= text_field_tag(:search) %> 
+  <%= label_tag(:replies, "Include replies?") %> 
+  <%= check_box_tag(:replies) %> 
+  <%= label_tag(:rts, "Include retweets?") %> 
+  <%= check_box_tag(:rts) %> 
+  <%= submit_tag("Search") %> 
+<% end %> 
 
-<%# <% <h4> <%= username #>'s last 25 Tweets </h4>  %> 
-
-<ul>
-  <% TwitterApi.get_last_25_tweets('StackCommerce').each do |tweet| %>
-  <li>
-    <div>
-      <p><%= tweet.text %></p>
-      <p><%= tweet.created_at%></p>
-    <div>
+<p>User search is <%= @user %></p> 
+<p>Replies is <%= @replies %></p> 
+<p>Retweets is <%= @rts %></p> 
+<% if @user.blank? %> 
+<h4>Enter a username to see the most recent tweets from that account.</h4> 
+<% else %> 
+<h4>Displaying last 25 tweets for user <%= @user %> </h4>  
+<ul> 
+  <% TwitterApi.get_last_25(@user, @replies, @rts).each do |tweet| %> 
+  <li> 
+    <div> 
+      <p><%= tweet.text %></p> 
+    </div>
   </li>
   <% end %>
 </ul>
-
+<% end %>
