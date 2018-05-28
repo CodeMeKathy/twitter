@@ -1,4 +1,5 @@
 class TweetController < ApplicationController
+  require 'twitter_api'
   def index
   end
   def search
