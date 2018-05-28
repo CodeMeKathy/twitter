@@ -1,8 +1,9 @@
 class TweetController < ApplicationController
-  require 'twitter_api'
+  require './lib/twitter_api.rb'
   def index
   end
   def search
+    # include twitter_api
     # puts 'search ran'
     if !params[:search].blank?
       @tweets = TwitterApi.get_last_25_tweets(params[:search], params[:replies], params[:rts])
