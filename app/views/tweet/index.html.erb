@@ -2,28 +2,26 @@
 
 <%# insert an input box %>
 
-<%= form_with method: :get do %> 
-  <%= label_tag(:search, "Username:") %> 
-  <%= text_field_tag(:search) %> 
-  <%= label_tag(:replies, "Include replies?") %> 
-  <%= check_box_tag(:replies) %> 
-  <%= label_tag(:rts, "Include retweets?") %> 
-  <%= check_box_tag(:rts) %> 
-  <%= submit_tag("Search") %> 
+<%= form_with method: :get, local: true do |f| %> 
+  <%= f.label :search, "Username:" %> 
+  <%= f.text_field :search %> 
+  <%= f.label :replies, "Include replies?" %> 
+  <%= check_box_tag :replies %> 
+  <%= f.label :rts, "Include retweets?" %> 
+  <%= check_box_tag :rts %> 
+  <%= f.submit "Search", name: nil %> 
 <% end %> 
 
-<p>User search is <%= @user %></p> 
-<p>Replies is <%= @replies %></p> 
-<p>Retweets is <%= @rts %></p> 
-<% if @user.blank? %> 
+<% if @tweets.nil? %> 
 <h4>Enter a username to see the most recent tweets from that account.</h4> 
 <% else %> 
-<h4>Displaying last 25 tweets for user <%= @user %> </h4>  
+<h4>Displaying last 25 tweets for user <%= @tweets[0].user.name %> </h4>  
 <ul> 
-  <% TwitterApi.get_last_25(@user, @replies, @rts).each do |tweet| %> 
+  <% @tweets.each do |tweet| %> 
   <li> 
     <div> 
       <p><%= tweet.text %></p> 
+      <p><%= tweet.created_at %></p> 
     </div>
   </li>
   <% end %>
